@@ -1,0 +1,37 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap');
+
+@import "tailwindcss";
+
+@theme {
+  /* Paleta -- "tinta sobre papel", pensada para catálogos y etiquetas */
+  --color-ink: #1B2A4A;
+  --color-ink-soft: #3D4A66;
+  --color-paper: #F3F5F7;
+  --color-paper-raised: #FFFFFF;
+  --color-amber: #E8A33D;
+  --color-amber-dark: #C78223;
+  --color-teal: #2F6F62;
+  --color-line: #DDE2E8;
+  --color-danger: #C0463A;
+
+  --font-display: 'Space Grotesk', sans-serif;
+  --font-sans: 'IBM Plex Sans', sans-serif;
+  --font-mono: 'IBM Plex Mono', monospace;
+}
+
+body {
+  background-color: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+}
+
+h1, h2, h3 {
+  font-family: var(--font-display);
+  letter-spacing: -0.01em;
+}
+
+/* Precios y códigos siempre en mono -- referencia literal a una
+   etiqueta de precio / recibo real, no es solo decoración. */
+.precio, .codigo {
+  font-family: var(--font-mono);
+}

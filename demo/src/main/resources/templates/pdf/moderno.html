@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Catálogo</title>
+    <style>
+        body { font-family: Helvetica, Arial, sans-serif; margin: 0; color: #1A1A1A; }
+
+        .banda {
+            padding: 30px 40px;
+            color: #FFFFFF;
+        }
+        .banda h1 { font-size: 26px; margin: 0; }
+        .banda .logo { max-height: 50px; margin-bottom: 10px; }
+
+        .contenido { padding: 30px 40px; }
+
+        .grilla { display: block; }
+        .producto {
+            display: inline-block;
+            width: 29%;
+            margin: 1.5%;
+            vertical-align: top;
+            border-radius: 8px;
+            border: 1px solid #E5E5E5;
+            overflow: hidden;
+            page-break-inside: avoid;
+        }
+        .producto img {
+            width: 100%;
+            height: 110px;
+            object-fit: cover;
+        }
+        .producto-cuerpo { padding: 10px; }
+        .producto h3 { font-size: 13px; margin: 0 0 8px; }
+        .badge-precio {
+            display: inline-block;
+            color: #FFFFFF;
+            font-size: 12px;
+            font-weight: bold;
+            padding: 3px 10px;
+            border-radius: 12px;
+        }
+        .descripcion { font-size: 10px; color: #777777; margin-top: 8px; }
+    </style>
+</head>
+<body>
+
+    <div class="banda" th:style="'background-color: ' + ${colorPrincipal} + ';'">
+        <img th:if="${logo != null and !logo.isEmpty()}" th:src="${logo}" class="logo" alt="logo"/>
+        <h1 th:text="${nombreCatalogo}">Nombre del catálogo</h1>
+    </div>
+
+    <div class="contenido">
+        <div class="grilla">
+            <div class="producto" th:each="producto : ${productos}">
+                <img th:if="${producto.imgUrl != null and !producto.imgUrl.isEmpty()}"
+                     th:src="${producto.imgUrl}" alt="producto"/>
+                <div class="producto-cuerpo">
+                    <h3 th:text="${producto.nombreProducto}">Nombre del producto</h3>
+                    <span class="badge-precio" th:text="${producto.precioFormateado}"
+                          th:style="'background-color: ' + ${colorSecundario} + ';'">$0</span>
+                    <p class="descripcion" th:if="${producto.descripcion != null and !producto.descripcion.isEmpty()}"
+                       th:text="${producto.descripcion}">Descripción</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

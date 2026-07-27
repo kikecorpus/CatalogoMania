@@ -1,0 +1,95 @@
+erDiagram
+    TIENDA {
+        bigint id_tienda PK
+        varchar nombre_tienda
+        varchar telefono
+        varchar correo
+        varchar direccion
+        varchar password
+        boolean admin
+    }
+
+    PRODUCTO {
+        bigint id_producto PK
+        varchar nombre_producto
+        text descripcion
+        decimal precio
+        varchar img_url
+        bigint tienda_id FK
+    }
+
+    CATEGORIA {
+        bigint id_categoria PK
+        varchar nombre_categoria
+        text descripcion
+    }
+
+    MEDIDA {
+        bigint id_medida PK
+        varchar nombre_medida
+        text descripcion
+    }
+
+    PLANTILLA {
+        bigint id_plantilla PK
+        varchar nombre_plantilla
+        varchar estado
+        boolean gratis
+        bigint categoria_p_id FK
+    }
+
+    CATEGORIA_P {
+        bigint id_categoria_p PK
+        varchar nombre_categoria
+        text descripcion
+    }
+
+    CATALOGO {
+        bigint id_catalogo PK
+        varchar nombre_catalogo
+        int cantidad_producto
+        varchar estado
+        bigint tienda_id FK
+        bigint plantilla_id FK
+        bigint personalizacion_id FK
+    }
+
+    PERSONALIZACION {
+        bigint id_personalizacion PK
+        varchar nombre_personalizacion
+        varchar logotipo
+        varchar color_principal
+        varchar color_secundario
+    }
+
+    PRODUCTO_CATALOGO {
+        bigint producto_id FK
+        bigint catalogo_id FK
+    }
+
+    PRODUCTO_CATEGORIA {
+        bigint producto_id FK
+        bigint categoria_id FK
+    }
+
+    PRODUCTO_MEDIDA {
+        bigint id_espesifica PK
+        bigint producto_id FK
+        bigint medida_id FK
+        varchar valor
+    }
+
+    TIENDA ||--o{ PRODUCTO : "tiene"
+    TIENDA ||--o{ CATALOGO : "muestra"
+    CATALOGO }o--|| PLANTILLA : "utiliza"
+    CATALOGO ||--|| PERSONALIZACION : "utiliza"
+    PLANTILLA }o--|| CATEGORIA_P : "se clasifica en"
+
+    PRODUCTO ||--o{ PRODUCTO_CATALOGO : "contiene"
+    CATALOGO ||--o{ PRODUCTO_CATALOGO : "contiene"
+
+    PRODUCTO ||--o{ PRODUCTO_CATEGORIA : "se clasifica en"
+    CATEGORIA ||--o{ PRODUCTO_CATEGORIA : "se clasifica en"
+
+    PRODUCTO ||--o{ PRODUCTO_MEDIDA : "especifica"
+    MEDIDA ||--o{ PRODUCTO_MEDIDA : "especifica"
